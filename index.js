@@ -18,7 +18,7 @@ const transporter = nodemailer.createTransport({
   },
 });
 app.get("/", async (req, res) => {
-  res.send("hello");
+  res.send("hello", `running on port ${port}`);
 });
 
 // Verify transporter configuration on startup
