@@ -34,13 +34,14 @@ app.post("/send", async (req, res) => {
   const { name, senderEmail, message } = req.body;
   const recipientEmail = "michaiahbos@yahoo.com"; // Set your email address here
 
-  const mailOptions = {
-    from: `"${name}" <${senderEmail}>`, 
-    to: recipientEmail,
-    subject: `Message from ${name}`,
-    text: message,
-    html: `<b>${message}</b><p>Sent by: ${senderEmail}</p>`, // Include sender's email in the body
-  };
+ const mailOptions = {
+   from: `"${name}" <${senderEmail}>`, // Correctly include the sender's email address
+   to: recipientEmail,
+   subject: `Message from ${name}`,
+   text: message,
+   html: `<b>${message}</b><p>Sent by: ${senderEmail}</p>`, // Include sender's email in the body
+ };
+
 
   try {
     const info = await transporter.sendMail(mailOptions);
