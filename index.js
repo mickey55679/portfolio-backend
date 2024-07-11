@@ -35,7 +35,7 @@ app.post("/send", async (req, res) => {
   const recipientEmail = "michaiahbos@yahoo.com"; // Set your email address here
 
   const mailOptions = {
-    from: `"${name}" <${process.env.EMAIL_USER}>`, // Sender's email is used in the 'from' field
+    from: `"${name}" <${senderEmail}>`, // Sender's email is used in the 'from' field
     to: recipientEmail,
     subject: `Message from ${name}`,
     text: message,
