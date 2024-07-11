@@ -1,24 +1,25 @@
-const express = require("express") 
-const cors = require("cors")
-const nodemailer = require("nodemailer")
-const dotenv = require("dotenv")
+const express = require("express");
+const cors = require("cors");
+const nodemailer = require("nodemailer");
+const dotenv = require("dotenv");
 dotenv.config();
 
 const app = express();
 app.use(cors());
-app.use(express.json()); // Updated middleware usage
+app.use(express.json());
 
 const transporter = nodemailer.createTransport({
   host: process.env.EMAIL_HOST,
   port: process.env.EMAIL_PORT || 465,
-  secure: process.env.EMAIL_PORT === "465", // Updated to compare as string
+  secure: process.env.EMAIL_PORT === "465", // Secure if port is 465
   auth: {
     user: process.env.EMAIL_USER,
     pass: process.env.EMAIL_PASS,
   },
 });
+
 app.get("/", async (req, res) => {
-  res.send("hello", `running on port ${port}`);
+  res.status(200).send(`Running on port ${port}`);
 });
 
 // Verify transporter configuration on startup
@@ -34,14 +35,13 @@ app.post("/send", async (req, res) => {
   const { name, senderEmail, message } = req.body;
   const recipientEmail = "michaiahbos@yahoo.com"; // Set your email address here
 
- const mailOptions = {
-   from: `"${name}" <${senderEmail}>`, // Correctly include the sender's email address
-   to: recipientEmail,
-   subject: `Message from ${name}`,
-   text: message,
-   html: `<b>${message}</b><p>Sent by: ${senderEmail}</p>`, // Include sender's email in the body
- };
-
+  const mailOptions = {
+    from: `"${name}" <${senderEmail}>`, // Include sender's email address
+    to: recipientEmail,
+    subject: `Message from ${name}`,
+    text: message,
+    html: `<b>${message}</b><p>Sent by: ${senderEmail}</p>`, // Include sender's email in the body
+  };
 
   try {
     const info = await transporter.sendMail(mailOptions);
