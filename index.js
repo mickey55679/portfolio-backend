@@ -33,7 +33,7 @@ transporter.verify(function (error, success) {
 
 app.post("/send", async (req, res) => {
   const { name, senderEmail, message } = req.body;
-  const recipientEmail = "michaiahbos@yahoo.com"; // Set your email address here
+  const recipientEmail = process.env.EMAIL_USER; // Set your email address here
 
   const mailOptions = {
     from: `"${name}" <${senderEmail}>`, // Include sender's email address
