@@ -27,16 +27,16 @@ transporter.verify(function (error, success) {
   if (error) {
     console.error("Transporter configuration error:", error);
   } else {
-    console.log("Server is ready to take our messages");
+    console.log("Server is ready to take your messages");
   }
 });
 
 app.post("/send", async (req, res) => {
   const { name, senderEmail, message } = req.body;
-  const recipientEmail = process.env.EMAIL_USER; // Set your email address here
+  const recipientEmail = "michaiahbos@yahoo.com"; // Set your email address here
 
   const mailOptions = {
-    from: `"${name}" <${senderEmail}>`, // Include sender's email address
+    from: `"${name}" <${process.env.EMAIL_USER}>`,
     to: recipientEmail,
     subject: `Message from ${name}`,
     text: message,
