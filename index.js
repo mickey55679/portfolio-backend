@@ -32,15 +32,15 @@ transporter.verify(function (error, success) {
 });
 
 app.post("/send", async (req, res) => {
-  const { name, senderEmail, message } = req.body;
-  const recipientEmail = "michaiahbos@yahoo.com"; // Set your email address here
+  const { name, email, message } = req.body;
+  const recipientEmail = "michaiahbos@yahoo.com"; // Set my email address here
 
   const mailOptions = {
     from: `"${name}" <${process.env.EMAIL_USER}>`,
     to: recipientEmail,
     subject: `Message from ${name}`,
     text: message,
-    html: `<b>${message}</b><p>Sent by: ${senderEmail}</p>`, // Include sender's email in the body
+    html: `<b>${message}</b><p>Sent by: ${email}</p>`, // Include sender's email in the body
   };
 
   try {
